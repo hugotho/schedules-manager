@@ -23,4 +23,7 @@ public class AdjudicatingBody {
 
     @OneToMany(mappedBy = "adjud_body")
     private Set<JudgeAdjudBody> judgeAdjudBodies = new HashSet<>();
+
+    @OneToMany(mappedBy = "adjud_body")
+    private Set<Schedule> schedules = new HashSet<>();
 }

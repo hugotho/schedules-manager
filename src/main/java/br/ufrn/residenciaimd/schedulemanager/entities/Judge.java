@@ -27,4 +27,7 @@ public class Judge {
 
     @OneToMany(mappedBy = "judge")
     private Set<JudgeAdjudBody> judgeAdjudBodies = new HashSet<>();
+
+    @OneToMany(mappedBy = "judge")
+    private Set<Trial> trials = new HashSet<>();
 }

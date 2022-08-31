@@ -1,11 +1,14 @@
 package br.ufrn.residenciaimd.schedulemanager.entities;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,4 +24,7 @@ public class Schedule {
     @Getter private Long id;
 
     @Getter @Setter private Timestamp date;
+
+    @OneToMany(mappedBy = "schedule")
+    private Set<ScheduleTrial> scheduleTrials = new HashSet<>();
 }

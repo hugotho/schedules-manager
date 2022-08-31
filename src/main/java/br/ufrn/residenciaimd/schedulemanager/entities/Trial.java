@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +25,10 @@ public class Trial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Judge rapporteur;
+
     @Getter @Setter private String number;
 
     @Column(name = "abstract")
@@ -30,4 +36,7 @@ public class Trial {
 
     @OneToMany(mappedBy = "trial")
     private Set<TrialPart> trialParts = new HashSet<>();
+
+    @OneToMany(mappedBy = "trial")
+    private Set<ScheduleTrial> scheduleTrials = new HashSet<>();
 }
