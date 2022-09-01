@@ -21,9 +21,9 @@ public class AdjudicatingBody {
 
     @Getter @Setter private String name;
 
-    @OneToMany(mappedBy = "adjud_body")
+    @OneToMany(mappedBy = "adjudicatingBody")
     private Set<JudgeAdjudBody> judgeAdjudBodies = new HashSet<>();
 
-    @OneToMany(mappedBy = "adjud_body")
+    @OneToMany(mappedBy = "adjudicatingBody")
     private Set<Schedule> schedules = new HashSet<>();
 }

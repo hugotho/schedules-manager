@@ -26,7 +26,7 @@ public class Trial {
     @Getter private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "judgeId")
     private Judge rapporteur;
 
     @Getter @Setter private String number;

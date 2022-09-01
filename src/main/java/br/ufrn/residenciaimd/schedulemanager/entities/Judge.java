@@ -28,6 +28,6 @@ public class Judge {
     @OneToMany(mappedBy = "judge")
     private Set<JudgeAdjudBody> judgeAdjudBodies = new HashSet<>();
 
-    @OneToMany(mappedBy = "judge")
+    @OneToMany(mappedBy = "rapporteur")
     private Set<Trial> trials = new HashSet<>();
 }
