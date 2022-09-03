@@ -5,9 +5,12 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import lombok.Data;
+
+@Data
 @Embeddable
 public class ScheduleTrialPK implements Serializable {
-    
+
     @Column(name = "schedule_id")
     private Long scheduleId;
 
