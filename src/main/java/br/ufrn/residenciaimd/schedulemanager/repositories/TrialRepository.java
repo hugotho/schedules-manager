@@ -8,5 +8,5 @@ import br.ufrn.residenciaimd.schedulemanager.entities.Trial;
 
 public interface TrialRepository extends JpaRepository<Trial, Integer>{
     
-    public Page<Trial> findByScheduleId(Long scheduleId, Pageable page);
+    public Page<Trial> findByScheduleTrialsScheduleId(int scheduleId, Pageable page);
 }
