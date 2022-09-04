@@ -3,39 +3,43 @@ package br.ufrn.residenciaimd.schedulemanager.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Data
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@AllArgsConstructor @NoArgsConstructor
 public class Trial {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Getter private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "judgeId")
-    private Judge rapporteur;
+    @JoinColumn(name = "rapporteurId")
+    @Getter @Setter private Judge rapporteur;
 
-    private String number;
-
-    @Column(name = "abstract")
-    private String abstractText;
-
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Part> parts = new HashSet<>();
+    @Getter @Setter private String number;
+    
+    @Column(name = "abstract", length = 2047)
+    @Getter @Setter private String abstractText;
 
     @OneToMany(mappedBy = "trial")
-    private Set<ScheduleTrial> scheduleTrials = new HashSet<>();
+    @JsonManagedReference
+    @Getter private Set<TrialParts> trialParts = new HashSet<>();
+
+    @OneToMany(mappedBy = "trial")
+    private Set<ScheduleTrials> scheduleTrials = new HashSet<>();
 }

@@ -12,20 +12,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
+@NoArgsConstructor @AllArgsConstructor
 public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Getter private Long id;
 
-    private Timestamp date;
+    @Getter @Setter private Timestamp scheduleDate;
 
     @OneToMany(mappedBy = "schedule")
-    private Set<ScheduleTrial> scheduleTrials = new HashSet<>();
+    private Set<ScheduleTrials> scheduleTrials = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "adjudicatingBodyId")

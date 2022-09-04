@@ -5,22 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufrn.residenciaimd.schedulemanager.entities.Trial;
 import br.ufrn.residenciaimd.schedulemanager.services.TrialService;
 
-@RequestMapping("/api")
+@RequestMapping(path = "/api")
 @RestController
 public class SchedulesRestController {
 
     @Autowired
     private TrialService trialService;
 
-    @GetMapping("/trials/{sheduleId}")
-    public @ResponseBody List<Trial> getTrialsByScheduleId(int sheduleId, Integer page, Integer pageSize) {
+    @GetMapping("/trials")
+    public @ResponseBody List<Trial> getTrialsByScheduleId(
+            @RequestParam(value = "sheduleId") Long sheduleId) {
 
-        return trialService.listTrialsByScheduleId(sheduleId, page, pageSize);
+        return trialService.listTrialsByScheduleId(sheduleId);
     }
 }

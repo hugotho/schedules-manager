@@ -7,24 +7,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
-public class ScheduleTrial {
+@NoArgsConstructor @AllArgsConstructor
+public class ScheduleTrials {
 
     @EmbeddedId
-    private ScheduleTrialPK id;
+    @Getter private ScheduleTrialsPK id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("scheduleId")
     @JoinColumn(name = "schedule_id")
-    private Schedule schedule;
+    @Getter @Setter private Schedule schedule;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("trialId")
     @JoinColumn(name = "trial_id")
-    private Trial trial;
+    @Getter @Setter private Trial trial;
 
-    private Integer trialOrder;
+    @Getter @Setter private Integer trialOrder;
 }

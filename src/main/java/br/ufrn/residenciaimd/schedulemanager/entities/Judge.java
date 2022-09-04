@@ -11,20 +11,26 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
+@NoArgsConstructor @AllArgsConstructor
 public class Judge {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Getter private Long id;
 
     @Column(name = "is_minister")
-    private Boolean isMinister;
+    @Getter @Setter private Boolean isMinister;
 
-    private String name;
+    @Getter @Setter private String name;
+
+    @OneToMany(mappedBy = "president")
+    private Set<AdjudicatingBody> presidedAdjudicatingBodies = new HashSet<>();
 
     @ManyToMany(mappedBy = "judges")
     private Set<AdjudicatingBody> adjudicatingBodies = new HashSet<>();
