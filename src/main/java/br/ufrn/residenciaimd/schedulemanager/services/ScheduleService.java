@@ -3,7 +3,6 @@ package br.ufrn.residenciaimd.schedulemanager.services;
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
