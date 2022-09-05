@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufrn.residenciaimd.schedulemanager.entities.Judge;
+import br.ufrn.residenciaimd.schedulemanager.entities.Part;
 import br.ufrn.residenciaimd.schedulemanager.entities.Schedule;
 import br.ufrn.residenciaimd.schedulemanager.entities.Trial;
 import br.ufrn.residenciaimd.schedulemanager.services.JudgeService;
+import br.ufrn.residenciaimd.schedulemanager.services.PartService;
 import br.ufrn.residenciaimd.schedulemanager.services.ScheduleService;
 import br.ufrn.residenciaimd.schedulemanager.services.TrialService;
+
 import lombok.AllArgsConstructor;
 
 @RequestMapping(path = "/api")
@@ -28,6 +31,8 @@ public class SchedulesRestController {
 
     private final JudgeService judgeService;
 
+    private final PartService partService;
+
     @GetMapping("/processos/pauta")
     public @ResponseBody List<Trial> getTrialsByScheduleId(
             @RequestParam(value = "id") Long sheduleId) {
@@ -40,6 +45,13 @@ public class SchedulesRestController {
             @RequestParam(value = "nome") String name) {
 
         return judgeService.getJudgesByNameContaining(name);
+    }
+
+    @GetMapping("/parte")
+    public @ResponseBody List<Part> getPartByName(
+            @RequestParam(value = "nome") String name) {
+
+        return partService.getPartsByNameContaining(name);
     }
 
     @GetMapping("/pautas")
