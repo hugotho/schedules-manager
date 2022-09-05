@@ -2,6 +2,7 @@ package br.ufrn.residenciaimd.schedulemanager.entities;
 
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -35,4 +36,17 @@ public class Schedule {
     @ManyToOne
     @JoinColumn(name = "adjudicatingBodyId")
     @Getter private AdjudicatingBody adjudicatingBody;
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Schedule) {
+            return this.id == ((Schedule)object).id;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, date, adjudicatingBody);
+    }
 }

@@ -33,13 +33,6 @@ public class SchedulesRestController {
 
     private final PartService partService;
 
-    @GetMapping("/processos/pauta")
-    public @ResponseBody List<Trial> getTrialsByScheduleId(
-            @RequestParam(value = "id") Long sheduleId) {
-
-        return trialService.listTrialsByScheduleId(sheduleId);
-    }
-
     @GetMapping("/magistrado")
     public @ResponseBody List<Judge> getJudgeByName(
             @RequestParam(value = "nome") String name) {
@@ -66,5 +59,19 @@ public class SchedulesRestController {
             @RequestParam(value = "id") Long judgeId) {
         Judge rapporteur = judgeService.getJudgeById(judgeId);
         return scheduleService.getScheduleByTrialRapporteur(rapporteur);
+    }
+
+    @GetMapping("/pautas/parte")
+    public @ResponseBody List<Schedule> getScheduleByTrialPart(
+            @RequestParam(value = "id") Long partId) {
+        Part part = partService.getPartById(partId);
+        return scheduleService.getScheduleByTrialPart(part);
+    }
+
+    @GetMapping("/processos/pauta")
+    public @ResponseBody List<Trial> getTrialsByScheduleId(
+            @RequestParam(value = "id") Long sheduleId) {
+
+        return trialService.listTrialsByScheduleId(sheduleId);
     }
 }
