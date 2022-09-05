@@ -1,12 +1,11 @@
 package br.ufrn.residenciaimd.schedulemanager.services;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.ufrn.residenciaimd.schedulemanager.entities.Judge;
 import br.ufrn.residenciaimd.schedulemanager.entities.Schedule;
 import br.ufrn.residenciaimd.schedulemanager.repositories.ScheduleRepository;
 import lombok.AllArgsConstructor;
@@ -17,12 +16,22 @@ public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
 
-    public Schedule getScheduleByDate(Date date) {
-        return scheduleRepository.findByDate(date);
+    public Schedule getScheduleById(Integer scheduleId) {
+        Optional<Schedule> schedule = scheduleRepository.findById(scheduleId);
+        if (schedule.isPresent())
+            return schedule.get();
+        return null;
     }
 
-    public Schedule getScheduleById(int scheduleId) {
-        Optional<Schedule> schedule = scheduleRepository.findById(scheduleId);
+    public Schedule getScheduleByDate(Date date) {
+        Optional<Schedule> schedule = scheduleRepository.findByDate(date);
+        if (schedule.isPresent())
+            return schedule.get();
+        return null;
+    }
+
+    public Schedule getScheduleByTrialRapporteur(Judge rapporteur) {
+        Optional<Schedule> schedule = scheduleRepository.findByScheduleTrialsTrialRapporteur(rapporteur);
         if (schedule.isPresent())
             return schedule.get();
         return null;
@@ -34,7 +43,7 @@ public class ScheduleService {
 
     public Schedule updateSchedule(int scheduleId, Schedule changedSchedule) {
         Optional<Schedule> schedule = scheduleRepository.findById(scheduleId);
-        // Check if the Schedule exists
+        
         if (schedule.isPresent()) {
             Schedule tempSchedule = schedule.get();
             tempSchedule.setDate(changedSchedule.getDate());

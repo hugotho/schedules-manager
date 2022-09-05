@@ -28,24 +28,31 @@ public class SchedulesRestController {
 
     private final JudgeService judgeService;
 
-    @GetMapping("/trials")
+    @GetMapping("/processos/pauta")
     public @ResponseBody List<Trial> getTrialsByScheduleId(
-            @RequestParam(value = "shedule_id") Long sheduleId) {
+            @RequestParam(value = "id") Long sheduleId) {
 
         return trialService.listTrialsByScheduleId(sheduleId);
     }
 
-    @GetMapping("/judge")
+    @GetMapping("/magistrado")
     public @ResponseBody List<Judge> getJudgeByName(
-            @RequestParam(value = "name") String name) {
+            @RequestParam(value = "nome") String name) {
 
         return judgeService.getJudgesByNameContaining(name);
     }
 
-    @GetMapping("/schedule")
+    @GetMapping("/pautas")
     public @ResponseBody Schedule getScheduleByDate(
-            @RequestParam(value = "date") Date date) {
+            @RequestParam(value = "data") Date date) {
 
         return scheduleService.getScheduleByDate(date);
+    }
+
+    @GetMapping("/pautas/relator")
+    public @ResponseBody Schedule getScheduleByTrialRapporteur(
+            @RequestParam(value = "id") Long judgeId) {
+        Judge rapporteur = judgeService.getJudgeById(judgeId);
+        return scheduleService.getScheduleByTrialRapporteur(rapporteur);
     }
 }
